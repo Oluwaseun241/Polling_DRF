@@ -1,0 +1,10 @@
+my_env
+*.log
+*.pot
+*.pyc
+__pycache__
+Api/__pycache__
+Api/migrations/__pycache__
+Polling/__pycache__
+db.sqlite3
+media
