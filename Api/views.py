@@ -9,5 +9,5 @@ from .serializers import PollSerializer
 def poll_list(request):
     if request.method == 'GET':
         polls = Poll.objects.all()
-        serializer = PollSerializer(polls)
+        serializer = PollSerializer(polls, many=True)
         return Response(serializer.data)
