@@ -124,11 +124,11 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-    ],
-}
-
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'rest_framework.authentication.TokenAuthentication',
+#     ],
+# }
+#
+# ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
