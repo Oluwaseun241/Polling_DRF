@@ -34,6 +34,10 @@ INSTALLED_APPS = [
 
     'rest_framework_swagger',
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+
+
     'Api',
 ]
 
@@ -119,3 +123,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
