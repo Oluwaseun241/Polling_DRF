@@ -12,6 +12,12 @@ class UserList(generics.ListAPIView):
 
 UserList = UserList.as_view()
 
+class RegisterUser(generics.CreateAPIView):
+    queryset = User.object.all()
+    serializer_class = UserSerializer
+
+RegisterUser = RegisterUser.as_view()
+
 class PollList(generics.ListCreateAPIView):
     queryset = Poll.objects.all()
     serializer_class = PollSerializer
