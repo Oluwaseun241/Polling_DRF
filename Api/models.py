@@ -1,8 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-from pygments.lexers import get_lexer_by_name
-from pygments.formatters.html import HtmlFormatter
-from pygments import highlight
 # Create your models here.
 
 
@@ -13,7 +11,7 @@ from pygments import highlight
 class Poll(models.Model):
     question = models.CharField(max_length=250)
     pub_date = models.DateTimeField('date published', auto_now_add=True)
-  
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)  
 
     def __str__(self):
         return self.question    
