@@ -2,13 +2,13 @@ from rest_framework import generics, permissions, status
 from .models import Poll, Answer
 from .serializers import PollSerializer, AnswerSerializer, UserSerializer
 from django.contrib.auth.models import User
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, AllowAny
 from rest_framework.response import Response
 
-class UserList(generics.ListCreateAPIView):
-    queryset = User.object.all()
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAdminUser]
+    permission_classes = [AllowAny]
 
 UserList = UserList.as_view()
 
