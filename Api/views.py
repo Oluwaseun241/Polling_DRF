@@ -13,7 +13,7 @@ class UserList(generics.ListAPIView):
 UserList = UserList.as_view()
 
 class RegisterUser(generics.CreateAPIView):
-    queryset = User.object.all()
+    queryset = User.objects.all()
     serializer_class = UserSerializer
 
 RegisterUser = RegisterUser.as_view()
