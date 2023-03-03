@@ -2,7 +2,6 @@ from rest_framework import generics, permissions, status
 from .models import Poll, Answer
 from .serializers import PollSerializer, AnswerSerializer, UserSerializer, RegisterSerializer
 from django.contrib.auth.models import User
-from rest_framework.permissions import IsAdminUser, AllowAny
 from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
 
@@ -11,14 +10,14 @@ from rest_framework.authentication import TokenAuthentication
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
 
 UserList = UserList.as_view()
 
 class RegisterUser(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [permissions.AllowAny]
 
 RegisterUser = RegisterUser.as_view()
 
@@ -40,7 +39,7 @@ class AnswerCreate(generics.CreateAPIView):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
 
-Answer = AnswerListCreate.as_view()
+Answer = AnswerCreate.as_view()
 
 
 # Function based views
