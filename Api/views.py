@@ -6,6 +6,8 @@ from rest_framework.permissions import IsAdminUser, AllowAny
 from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
 
+
+
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
