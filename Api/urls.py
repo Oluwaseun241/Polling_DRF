@@ -7,5 +7,6 @@ urlpatterns = [
     path('register/', views.RegisterUser),
     path('poll/', views.PollList),
     path('poll/<int:pk>', views.PollDetail)
+    path('poll/answer/<int:pk>', views.Answer)
     #path('', views.poll_list)
 ]

@@ -21,7 +21,7 @@ class Poll(models.Model):
 class Answer(models.Model):
     poll = models.ForeignKey(Poll, on_delete=models.CASCADE, related_name='answers')
     answer_text = models.CharField(max_length=200)
-    
+
     def __str__(self):
         return self.answer_text
     

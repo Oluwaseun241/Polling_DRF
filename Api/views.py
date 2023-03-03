@@ -36,9 +36,11 @@ class PollDetail(generics.RetrieveUpdateDestroyAPIView):
 PollDetail = PollDetail.as_view()
 
 
-class AnswerListCreateSerializer(generics.ListCreateAPIView):
+class AnswerCreate(generics.CreateAPIView):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
+
+Answer = AnswerListCreate.as_view()
 
 
 # Function based views

@@ -36,7 +36,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
 
-class AnswerSerializer(serializers.ModelSerializer): 
+class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answer
         fields = ['id','answer_text']
