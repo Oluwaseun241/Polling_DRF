@@ -7,7 +7,6 @@ from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
 
 class UserList(generics.ListAPIView):
-    authentication_class = (TokenAuthentication)
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
