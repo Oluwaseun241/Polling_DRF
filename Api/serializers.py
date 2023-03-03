@@ -8,7 +8,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         #fields = '__all__'
-        fields = ['id', 'username', 'email']
+        fields = ['username', 'email']
         
 class RegisterSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True,validators=[UniqueValidator(queryset=User.objects.all())])
@@ -35,16 +35,15 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
-    
-class PollSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Poll
-        fields = '__all__'
 
-class AnswerSerializer(serializers.ModelSerializer):
-
-    user = serializers.ReadOnlyField(source='user.username')
-    
+class AnswerSerializer(serializers.ModelSerializer): 
     class Meta:
         model = Answer
-        fields = ['id','poll','answer_text', 'user']
+        fields = ['id','answer_text']
+
+class PollSerializer(serializers.ModelSerializer):
+    answers = AnswerSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Poll
+        fields = ['id','question', 'pub_date', 'owner', 'answers']

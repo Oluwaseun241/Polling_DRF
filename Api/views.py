@@ -35,6 +35,12 @@ class PollDetail(generics.RetrieveUpdateDestroyAPIView):
 
 PollDetail = PollDetail.as_view()
 
+
+class AnswerListCreateSerializer(generics.ListCreateAPIView):
+    queryset = Answer.objects.all()
+    serializer_class = AnswerSerializer
+
+
 # Function based views
 # @api_view(['GET', 'POST'])
 # def poll_list(request):
