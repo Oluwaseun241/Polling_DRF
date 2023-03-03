@@ -12,34 +12,37 @@ class UserList(generics.ListAPIView):
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-UserList = UserList.as_view()
+user_list = UserList.as_view()
 
 class RegisterUser(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
     permission_classes = [permissions.AllowAny]
 
-RegisterUser = RegisterUser.as_view()
+register_user = RegisterUser.as_view()
 
 class PollList(generics.ListCreateAPIView):
     queryset = Poll.objects.all()
     serializer_class = PollSerializer
+    permission_classes = [permissions.AllowAny]
 
-PollList = PollList.as_view()
+poll_list = PollList.as_view()
 
 class PollDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Poll.objects.all()
     serializer_class = PollSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-PollDetail = PollDetail.as_view()
+poll_detail = PollDetail.as_view()
 
 
 class AnswerCreate(generics.CreateAPIView):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
 
-Answer = AnswerCreate.as_view()
+    def perform_create(request,pk):
+        pass
+answer = AnswerCreate.as_view()
 
 
 # Function based views

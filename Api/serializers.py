@@ -39,7 +39,8 @@ class RegisterSerializer(serializers.ModelSerializer):
 class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answer
-        fields = ['id','answer_text']
+        fields = ['id','answer_text', 'poll_id']
+    
 
 class PollSerializer(serializers.ModelSerializer):
     answers = AnswerSerializer(many=True, read_only=True)
