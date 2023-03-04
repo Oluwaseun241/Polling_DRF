@@ -44,7 +44,11 @@ class AnswerSerializer(serializers.ModelSerializer):
 
 class PollSerializer(serializers.ModelSerializer):
     answers = AnswerSerializer(many=True, read_only=True)
+    owner = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
     class Meta:
         model = Poll
         fields = ['id','question', 'pub_date', 'owner', 'answers']
+
+    def create(self, validated_data):
+        return Poll.objects.create(owner=self.context['request'].user, **validated_data)
