@@ -11,6 +11,7 @@ urlpatterns = [
     
     # Poll
     path('poll/', views.poll_list),
+    path('poll/create', views.poll_create),
     path('poll/<int:pk>', views.poll_detail),
     path('poll/<int:pk>/answer', views.create_answer)
 ]

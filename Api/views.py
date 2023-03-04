@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions, status
 from .models import Poll, Answer
-from .serializers import PollSerializer, AnswerSerializer, UserSerializer, RegisterSerializer
+from .serializers import PollSerializer, AnswerSerializer, UserSerializer, RegisterSerializer, PollCreateSerializer
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
@@ -29,12 +29,22 @@ class RegisterUser(generics.CreateAPIView):
 
 register_user = RegisterUser.as_view()
 
-class PollList(generics.ListCreateAPIView):
+class PollList(generics.ListAPIView):
     queryset = Poll.objects.all()
     serializer_class = PollSerializer
     permission_classes = [permissions.AllowAny]
-
+    
 poll_list = PollList.as_view()
+
+class PollCreate(generics.CreateAPIView):
+    queryset = Poll.objects.all()
+    serializer_class = PollCreateSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+poll_create = PollCreate.as_view()
 
 class PollDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Poll.objects.all()
