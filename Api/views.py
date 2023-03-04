@@ -4,6 +4,7 @@ from .serializers import PollSerializer, AnswerSerializer, UserSerializer, Regis
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
+from django.shortcuts import get_object_or_404
 
 
 
@@ -47,20 +48,24 @@ class AnswerCreate(generics.CreateAPIView):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
 
-    def create(self, request, *args, **kwargs):
-        poll_id = self.kwargs.get('poll_id')
-
-        try:
-            poll = Poll.objects.get(pk=poll_id)
-        except Poll.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-
-        user = request.user
-
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save(poll=poll, user=user)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    def perform_create(self, serializer):
+        poll_id = self.kwargs['pk']
+        poll = get_object_or_404(Poll, pk=poll_id)
+        serializer.save(poll=poll, user=self.request.user)
+    # def create(self, request, *args, **kwargs):
+    #     poll_id = self.kwargs.get('poll_id')
+    #
+    #     try:
+    #         poll = Poll.objects.get(pk=poll_id)
+    #     except Poll.DoesNotExist:
+    #         return Response(status=status.HTTP_404_NOT_FOUND)
+    #
+    #     user = request.user
+    #
+    #     serializer = self.get_serializer(data=request.data)
+    #     serializer.is_valid(raise_exception=True)
+    #     serializer.save(poll=poll, user=user)
+    #     return Response(serializer.data, status=status.HTTP_201_CREATED)
             
 create_answer = AnswerCreate.as_view()
 

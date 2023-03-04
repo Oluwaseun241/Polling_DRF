@@ -12,5 +12,5 @@ urlpatterns = [
     # Poll
     path('poll/', views.poll_list),
     path('poll/<int:pk>', views.poll_detail),
-    path('poll/<int:poll_id>/answer', views.create_answer)
+    path('poll/<int:pk>/answer', views.create_answer)
 ]
