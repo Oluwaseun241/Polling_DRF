@@ -6,32 +6,43 @@ REST api with Django Rest Framework where authenticated users (Token Authenticat
 
 ## API Endpionts
 
-### User registration endpoint
+- User registration endpoint
 
-- /api/auth/register
+```
+/api/auth/register
+```
 
-### User login endpoint
+- User login endpoint
 
-- /api/auth/login
+```
+/api/auth/login
+```
 
-### Create poll:
+- Create poll:
 
-- /api/poll/create
+```
+/api/poll/create
+```
 
-### Fetch poll:
+- Fetch poll:
+  Any user can fetch the poll
 
-Any user can fetch the poll
+```
+/api/poll
+```
 
-- /api/poll
-
-### Answer poll
+- Answer poll
 
 Any user can answer the poll
 
-- /api/poll/{id}/answer
+```
+/api/poll/{id}/answer
+```
 
-### Delete poll
+- Delete poll
 
 Only the user who created the poll can delete it
 
-- /api/poll/{id}
+```
+/api/poll/{id}
+```
