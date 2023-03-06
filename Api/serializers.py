@@ -20,9 +20,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('username', 'email', 'password', 'password2')
-        
-        #extra_kwargs = {'first_name': {'required': True},'last_name': {'required': True}}
-  
+          
 
     def validate(self, attrs):
         if attrs['password'] != attrs['password2']:
@@ -47,13 +45,7 @@ class PollCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Poll
         fields = ['question']
-
-    # def create(self, validated_data):
-    #     choices_data = validated_data.pop('answer')
-    #     poll = Poll.objects.create(**validated_data)
-    #     for answer_data in answers_data:
-    #         Answer.objects.create(poll=poll, **answer_data)
-    #     return poll
+ 
 
 class PollSerializer(serializers.ModelSerializer):
     answers = AnswerSerializer(many=True, read_only=True)

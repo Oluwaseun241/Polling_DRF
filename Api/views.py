@@ -1,9 +1,7 @@
-from rest_framework import generics, permissions, status
+from rest_framework import generics, permissions
 from .models import Poll, Answer
 from .serializers import PollSerializer, AnswerSerializer, UserSerializer, RegisterSerializer, PollCreateSerializer
 from django.contrib.auth.models import User
-from rest_framework.response import Response
-from rest_framework.authentication import TokenAuthentication
 from django.shortcuts import get_object_or_404
 
 
@@ -57,39 +55,14 @@ poll_detail = PollDetail.as_view()
 class AnswerCreate(generics.CreateAPIView):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
+    permission_classes = [permissions.AllowAny]
 
     def perform_create(self, serializer):
         poll_id = self.kwargs['pk']
         poll = get_object_or_404(Poll, pk=poll_id)
         serializer.save(poll=poll, user=self.request.user)
-    # def create(self, request, *args, **kwargs):
-    #     poll_id = self.kwargs.get('poll_id')
-    #
-    #     try:
-    #         poll = Poll.objects.get(pk=poll_id)
-    #     except Poll.DoesNotExist:
-    #         return Response(status=status.HTTP_404_NOT_FOUND)
-    #
-    #     user = request.user
-    #
-    #     serializer = self.get_serializer(data=request.data)
-    #     serializer.is_valid(raise_exception=True)
-    #     serializer.save(poll=poll, user=user)
-    #     return Response(serializer.data, status=status.HTTP_201_CREATED)
-            
+
 create_answer = AnswerCreate.as_view()
 
 
-# Function based views
-# @api_view(['GET', 'POST'])
-# def poll_list(request):
-#     if request.method == 'GET':
-#         polls = Poll.objects.all()
-#         serializer = PollSerializer(polls, many=True)
-#         return Response(serializer.data)
-#     elif request.method == 'POST':
-#         serializer = PollSerializer(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
