@@ -3,7 +3,7 @@ from .models import Poll, Answer
 from .serializers import PollSerializer, AnswerSerializer, UserSerializer, RegisterSerializer, PollCreateSerializer
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
-
+from drf_yasg.utils import swagger_auto_schema
 
 
 class IsOwnerOrReadOnly(permissions.BasePermission):
@@ -38,6 +38,7 @@ class PollCreate(generics.CreateAPIView):
     queryset = Poll.objects.all()
     serializer_class = PollCreateSerializer
     permission_classes = [permissions.IsAuthenticated]
+    
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
