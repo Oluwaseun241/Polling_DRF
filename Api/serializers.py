@@ -7,7 +7,6 @@ from django.contrib.auth.password_validation import validate_password
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        #fields = '__all__'
         fields = ['username', 'email']
         
 class RegisterSerializer(serializers.ModelSerializer):
@@ -51,4 +50,5 @@ class PollSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Poll
-        fields = '__all__'
+        fields = ['id','question','answers','owner']
+        
