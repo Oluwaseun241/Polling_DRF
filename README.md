@@ -2,7 +2,7 @@
 
 REST api with Django Rest Framework where authenticated users (Token Authentication) can create a poll
 
-- URL:
+- URL: https://polling.up.railway.app/
 
 ## API Endpionts
 

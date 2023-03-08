@@ -4,6 +4,7 @@ from .serializers import PollSerializer, AnswerSerializer, UserSerializer, Regis
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from drf_yasg.utils import swagger_auto_schema
+from rest_framework.authentication import TokenAuthentication
 
 
 class IsOwnerOrReadOnly(permissions.BasePermission):
@@ -17,6 +18,8 @@ class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
 
 user_list = UserList.as_view()
 
@@ -24,6 +27,7 @@ class RegisterUser(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
     permission_classes = [permissions.AllowAny]
+    authentication_classes = [TokenAuthentication]
 
 register_user = RegisterUser.as_view()
 
@@ -31,13 +35,15 @@ class PollList(generics.ListAPIView):
     queryset = Poll.objects.all()
     serializer_class = PollSerializer
     permission_classes = [permissions.AllowAny]
-    
+    authentication_classes = [TokenAuthentication,]
+
 poll_list = PollList.as_view()
 
 class PollCreate(generics.CreateAPIView):
     queryset = Poll.objects.all()
     serializer_class = PollCreateSerializer
     permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
     
 
     def perform_create(self, serializer):
@@ -49,6 +55,7 @@ class PollDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Poll.objects.all()
     serializer_class = PollSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    authentication_classes = [TokenAuthentication]
 
 poll_detail = PollDetail.as_view()
 
@@ -57,6 +64,7 @@ class AnswerCreate(generics.CreateAPIView):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
     permission_classes = [permissions.AllowAny]
+    authentication_classes = [TokenAuthentication]
 
     def perform_create(self, serializer):
         poll_id = self.kwargs['pk']
