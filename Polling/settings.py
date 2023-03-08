@@ -24,7 +24,7 @@ ALLOWED_HOSTS = ["127.0.0.1","polling.up.railway.app"]
 
 CSRF_TRUSTED_ORIGINS = ["https://polling.up.railway.app"]
 
-CORS_ALLOWED_ALL_ORIGINS = False
+#CORS_ALLOW_ALL_ORIGINS = False
 
 CORS_ALLOWED_ORIGINS = [
     "https://polling.up.railway.app",
