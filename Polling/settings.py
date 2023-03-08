@@ -22,6 +22,15 @@ DEBUG = os.getenv('DEBUG')
 ALLOWED_HOSTS = ["127.0.0.1","polling.up.railway.app"]
 
 
+CSRF_TRUSTED_ORIGINS = ["https://polling.up.railway.app"]
+
+CORS_ALLOWED_ALL_ORIGINS = False
+
+CORS_ALLOWED_ORIGINS = [
+    "https://polling.up.railway.app",
+    "http://127.0.0.1:8000",
+]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -153,8 +162,6 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOWED_ALL_ORIGINS = True
-
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication'
@@ -162,10 +169,7 @@ REST_FRAMEWORK = {
 }
     
 SWAGGER_SETTINGS = {
-   'SECURITY_DEFINITIONS': {
-     # 'Basic': {
-     #        'type': 'basic'
-     #  }, 
+   'SECURITY_DEFINITIONS': { 
       'Bearer': {
             'type': 'apiKey',
             'name': 'Authorization',
