@@ -3,6 +3,11 @@ from . import views
 from rest_framework.authtoken.views import obtain_auth_token
 
 
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authentication import TokenAuthentication
+
+ObtainAuthToken.authentication_classes = [TokenAuthentication]
+
 urlpatterns = [
     # Authentication
     path('auth/', obtain_auth_token),
@@ -16,7 +21,3 @@ urlpatterns = [
     path('poll/<int:pk>/answer', views.create_answer),
 ]
 
-from rest_framework.authtoken.views import ObtainAuthToken
-from rest_framework.authentication import TokenAuthentication
-
-ObtainAuthToken.authentication_classes = [TokenAuthentication]
